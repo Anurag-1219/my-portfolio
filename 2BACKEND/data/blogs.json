@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "title": "How I Built a Real-Time Graph Algorithm Visualizer",
+    "excerpt": "Walking through the architecture, Canvas API tricks, and performance optimizations that made smooth 60fps graph traversal animations possible.",
+    "content": "Full blog content here...",
+    "tags": ["DSA", "JavaScript", "Canvas", "Algorithms"],
+    "category": "DSA",
+    "readTime": "8 min read",
+    "date": "2024-11-15",
+    "slug": "graph-algorithm-visualizer"
+  },
+  {
+    "id": 2,
+    "title": "RAG Architecture: Building ChatMind from Scratch",
+    "excerpt": "A deep dive into Retrieval-Augmented Generation — how vector embeddings, semantic search, and LLMs combine to let you chat with your own data.",
+    "content": "Full blog content here...",
+    "tags": ["AI/ML", "LangChain", "RAG", "OpenAI"],
+    "category": "AI/ML",
+    "readTime": "12 min read",
+    "date": "2024-10-02",
+    "slug": "rag-architecture-chatmind"
+  },
+  {
+    "id": 3,
+    "title": "Dynamic Programming Demystified: From Memoization to Tabulation",
+    "excerpt": "A pattern-based approach to DP that helped me crack 50+ LeetCode hard problems. Includes templates, intuition-building tricks, and common pitfalls.",
+    "content": "Full blog content here...",
+    "tags": ["DSA", "Dynamic Programming", "LeetCode"],
+    "category": "DSA",
+    "readTime": "15 min read",
+    "date": "2024-08-20",
+    "slug": "dynamic-programming-demystified"
+  },
+  {
+    "id": 4,
+    "title": "Scaling Node.js: Lessons from Building AlgoArena",
+    "excerpt": "How I went from a single Express server to a Redis-backed, Docker-orchestrated system handling thousands of concurrent code submissions.",
+    "content": "Full blog content here...",
+    "tags": ["Web", "Node.js", "Redis", "Docker", "Performance"],
+    "category": "Web",
+    "readTime": "10 min read",
+    "date": "2024-07-05",
+    "slug": "scaling-nodejs-algoarena"
+  }
+]

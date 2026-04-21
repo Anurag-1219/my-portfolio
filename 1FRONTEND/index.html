@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Page Title ── -->
+  <title>Anurag Yadav — Web · DSA · AI/ML</title>
+
+  <!-- ── Google Fonts: Space Mono (code), Bebas Neue (headings), Outfit (body) ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ── Saari CSS alag file mein hai ── -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVBAR
+     - Logo left, links center, "Hire Me" right
+     - Mobile par hamburger icon aata hai
+     ════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">&lt;<span>dev</span>/&gt;</div>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+  <!-- Hamburger: sirf mobile screens par dikhta hai (CSS mein hidden hai desktop par) -->
+  <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     MOBILE NAVIGATION OVERLAY
+     - Chhoti screen par pura screen cover karta hai
+     - toggleMobileNav() se open/close hota hai
+     ════════════════════════════════════════ -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="toggleMobileNav()">✕</button>
+  <a href="#projects" onclick="toggleMobileNav()">Projects</a>
+  <a href="#skills"   onclick="toggleMobileNav()">Skills</a>
+  <a href="#blog"     onclick="toggleMobileNav()">Blog</a>
+  <a href="#contact"  onclick="toggleMobileNav()">Contact</a>
+</div>
+
+<!-- ════════════════════════════════════════
+     HERO SECTION
+     - Tera naam bada dikhta hai
+     - Typewriter animation roles cycle karti hai
+     - Background mein particles canvas hai
+     - Right side par fake Python terminal card hai
+     ════════════════════════════════════════ -->
+<section id="hero">
+  <!-- Animated particle network — script.js ka initCanvas() handle karta hai -->
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="hero-grid">
+
+    <!-- ── LEFT: Apna intro ── -->
+    <div class="hero-content">
+      <div class="hero-tag">Available for work</div>
+
+      <!-- ✏️ EDIT: Apna naam yahan badlo -->
+      <h1 class="hero-name">ANURAG<br>YADAV</h1>
+
+      <!-- Typewriter text — roles list script.js mein edit kar sakte ho -->
+      <div class="hero-roles">
+        <span id="role-text">Web Developer</span><span class="t-cursor"></span>
+      </div>
+
+      <!-- ✏️ EDIT: Apna short bio yahan likho -->
+      <p class="hero-desc">
+        I build intelligent systems and elegant interfaces — from optimized algorithms and AI models to production-ready full-stack apps.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <!-- Resume download — script.js ka downloadResume() function call hota hai -->
+        <button class="btn-outline" onclick="downloadResume()">↓ Resume</button>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: Terminal card ── -->
+    <div class="hero-terminal">
+      <!-- macOS style window buttons -->
+      <div class="terminal-bar">
+        <div class="t-dot red"></div>
+        <div class="t-dot yellow"></div>
+        <div class="t-dot green"></div>
+        <div class="t-title">portfolio.py</div>
+      </div>
+      <div class="terminal-body">
+        <span class="t-line"><span class="t-comment"># Who am I?</span></span>
+        <span class="t-line"><span class="t-key">developer</span> = {</span>
+
+        <!-- ✏️ EDIT: Terminal mein apna naam -->
+        <span class="t-line">  <span class="t-string">"name"</span>: <span class="t-val">"Anurag Yadav"</span>,</span>
+
+        <span class="t-line">  <span class="t-string">"focus"</span>: [</span>
+        <span class="t-line">    <span class="t-val">"Web Dev"</span>, <span class="t-val">"DSA"</span>, <span class="t-val">"AI/ML"</span></span>
+        <span class="t-line">  ],</span>
+
+        <!-- ✏️ EDIT: Apna LeetCode progress -->
+        <span class="t-line">  <span class="t-string">"leetcode"</span>: <span class="t-val">"50+ solved"</span>,</span>
+
+        <span class="t-line">  <span class="t-string">"coffee"</span>: <span class="t-val">float('inf')</span>,</span>
+        <span class="t-line">}</span>
+        <span class="t-line">&nbsp;</span>
+        <span class="t-line"><span class="t-prompt">>>> </span><span class="t-cmd">developer.build_something_cool()</span></span>
+        <span class="t-line"><span class="t-comment"># Loading... ✅ Ready to ship!</span></span>
+        <span class="t-line"><span class="t-prompt">>>> </span><span class="t-cursor"></span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     STATS BAR
+     - Scroll karne par counter animate hota hai
+     - ✏️ EDIT: data-target mein apna actual number daalo
+     ════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num" data-target="50">0</div>   <!-- ✏️ LeetCode problems solved -->
+    <div class="stat-label">LeetCode Solved</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="2">0</div>    <!-- ✏️ Projects complete kiye -->
+    <div class="stat-label">Projects Shipped</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="5">0</div>    <!-- ✏️ GitHub repos count -->
+    <div class="stat-label">GitHub Repos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" data-target="3">0</div>    <!-- ✏️ Kitne saal se coding kar raha hai -->
+    <div class="stat-label">Years Coding</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PROJECTS SECTION
+     - Cards API se load hote hain (backend/data/projects.json)
+     - Agar backend nahi chala toh fallback data script.js mein hai
+     - Filter buttons category se filter karte hain
+     ════════════════════════════════════════ -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <div class="section-tag">// projects</div>
+    <h2 class="section-title">WHAT I'VE BUILT</h2>
+    <p class="section-sub">A selection of projects across web, DSA, and AI/ML.</p>
+  </div>
+
+  <!-- Filter buttons — script.js mein click listener lagaya hai -->
+  <div class="filter-bar fade-in">
+    <button class="filter-btn active" data-filter="All">All</button>
+    <button class="filter-btn" data-filter="Web">Web</button>
+    <button class="filter-btn" data-filter="DSA">DSA</button>
+    <button class="filter-btn" data-filter="AI/ML">AI/ML</button>
+  </div>
+
+  <!-- Project cards yahan dynamically inject hote hain -->
+  <div class="projects-grid" id="projects-grid">
+    <div class="loading-spinner"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SKILLS SECTION
+     - Top mein achievement cards hain
+     - Neeche skill bars hain jo scroll par animate hoti hain
+     - Data: backend/data/skills.json se aata hai
+     ════════════════════════════════════════ -->
+<div id="skills" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <section style="max-width:1200px; margin:0 auto; padding:6rem 2.5rem;">
+    <div class="section-header fade-in">
+      <div class="section-tag">// skills</div>
+      <h2 class="section-title">WHAT I KNOW</h2>
+      <p class="section-sub">Technologies, tools, and skills I've mastered over the years.</p>
+    </div>
+
+    <!-- Achievement cards (LeetCode, GitHub, etc.) — script.js inject karta hai -->
+    <div class="achievements-row fade-in" id="achievements-row">
+      <div class="loading-spinner"><div class="spinner"></div></div>
+    </div>
+
+    <!-- Skill bar cards — script.js inject karta hai -->
+    <div class="skills-grid" id="skills-grid"></div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════
+     BLOG SECTION
+     - Cards backend/data/blogs.json se aate hain
+     - Click karo toh "coming soon" toast aata hai
+     - Baad mein full blog reader add kar sakte ho
+     ════════════════════════════════════════ -->
+<section id="blog">
+  <div class="section-header fade-in">
+    <div class="section-tag">// blog</div>
+    <h2 class="section-title">THOUGHTS & WRITES</h2>
+    <p class="section-sub">Deep dives into algorithms, AI, and engineering.</p>
+  </div>
+
+  <!-- Blog cards yahan inject hote hain -->
+  <div class="blogs-grid" id="blogs-grid">
+    <div class="loading-spinner"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CONTACT SECTION
+     - Left: Teri social links
+     - Right: Form jo backend ko POST karta hai
+     - ✏️ EDIT: Apni email aur social handles yahan daalo
+     ════════════════════════════════════════ -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <div class="section-tag">// contact</div>
+    <h2 class="section-title">LET'S CONNECT</h2>
+    <p class="section-sub">Have a project in mind or just want to say hi?</p>
+  </div>
+
+  <div class="contact-wrapper fade-in">
+
+    <!-- ── LEFT: Social links ── -->
+    <div class="contact-info">
+      <h3>Drop me a line.</h3>
+      <!-- ✏️ EDIT: Apni availability yahan update karo -->
+      <p>I'm currently open to Internship projects, full-time roles, and research collaborations in AI/ML and full-stack engineering.</p>
+
+      <div class="contact-links">
+        <!-- ✏️ EDIT: Apni Gmail -->
+        <a href="mailto:anuragyadav6301@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉️</span> anuragyadav6301@gmail.com
+        </a>
+        <!-- ✏️ EDIT: Apna GitHub -->
+        <a href="https://github.com/Anurag-1219" target="_blank" class="contact-link">
+          <span class="contact-link-icon">🐙</span> GitHub
+        </a>
+        <!-- ✏️ EDIT: Apna LinkedIn -->
+        <a href="https://www.linkedin.com/in/anurag1219" target="_blank" class="contact-link">
+          <span class="contact-link-icon">💼</span> LinkedIn
+        </a>
+        <!-- ✏️ EDIT: Apna LeetCode -->
+        <a href="https://leetcode.com/u/Anurag1219/" target="_blank" class="contact-link">
+          <span class="contact-link-icon">⚡</span> LeetCode
+        </a>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: Contact form ── -->
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Jane Smith" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="jane@example.com" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="Project inquiry / Collaboration / Say hi" />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Tell me about your project or idea..." required></textarea>
+      </div>
+
+      <!-- Submit — script.js ka sendMessage() call hota hai -->
+      <button class="form-submit" id="submit-btn" onclick="sendMessage()">
+        SEND MESSAGE →
+      </button>
+
+      <!-- Success ya Error message yahan aata hai -->
+      <div class="form-status" id="form-status"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     RESUME BANNER
+     - Download button backend/data/resume.pdf serve karta hai
+     - ✏️ EDIT: Apna resume.pdf backend/data/ folder mein daalo
+     ════════════════════════════════════════ -->
+<div class="resume-banner fade-in" style="margin:0 2.5rem 4rem; max-width:none;">
+  <div class="resume-text">
+    <h3>Want the full picture?</h3>
+    <p>Download my resume for a complete overview of experience, education, and achievements.</p>
+  </div>
+  <button class="btn-resume" onclick="downloadResume()">↓ Download Resume</button>
+</div>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+     - ✏️ EDIT: Apna naam aur social links update karo
+     ════════════════════════════════════════ -->
+<footer>
+  <div class="footer-left">
+    Crafted with <span>♥</span> by <span>Anurag Yadav</span> · 2026
+  </div>
+  <div class="footer-social">
+    <a href="https://github.com/Anurag-1219"         target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/anurag1219" target="_blank">LinkedIn</a>
+    <a href="https://leetcode.com/u/Anurag1219/"     target="_blank">LeetCode</a>
+    <a href="https://www.kaggle.com/anurag1219"      target="_blank">Kaggle</a>
+  </div>
+</footer>
+
+<!-- Toast popup notification — showToast() script.js mein hai -->
+<div class="toast" id="toast"></div>
+
+<!-- ── Saara JavaScript alag file mein hai ── -->
+<script src="./script.js"></script>
+</body>
+</html>

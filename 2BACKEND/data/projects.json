@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "NeuralNet Visualizer",
+    "description": "Interactive deep learning visualization tool that animates forward & backpropagation in real time. Built to make AI intuitive.",
+    "tags": ["Python", "TensorFlow", "D3.js", "Flask"],
+    "category": "AI/ML",
+    "github": "https://github.com/yourusername/neuralnet-viz",
+    "live": "https://neuralnet-viz.demo.com",
+    "featured": true,
+    "year": 2024
+  },
+  {
+    "id": 2,
+    "title": "AlgoArena",
+    "description": "Competitive DSA platform with 300+ problems, real-time code execution, and adaptive difficulty — powered by ML performance tracking.",
+    "tags": ["React", "Node.js", "Docker", "PostgreSQL", "Redis"],
+    "category": "DSA",
+    "github": "https://github.com/yourusername/algoarena",
+    "live": "https://algoarena.demo.com",
+    "featured": true,
+    "year": 2024
+  },
+  {
+    "id": 3,
+    "title": "SentimentStream",
+    "description": "Real-time social media sentiment analysis pipeline using transformer models. Processes 10k tweets/minute with 94% accuracy.",
+    "tags": ["Python", "Kafka", "BERT", "FastAPI", "React"],
+    "category": "AI/ML",
+    "github": "https://github.com/yourusername/sentimentstream",
+    "live": "",
+    "featured": true,
+    "year": 2023
+  },
+  {
+    "id": 4,
+    "title": "DevFlow",
+    "description": "Full-stack developer productivity dashboard with GitHub integration, PR analytics, and AI-powered code review suggestions.",
+    "tags": ["Next.js", "GraphQL", "OpenAI API", "MongoDB"],
+    "category": "Web",
+    "github": "https://github.com/yourusername/devflow",
+    "live": "https://devflow.demo.com",
+    "featured": false,
+    "year": 2023
+  },
+  {
+    "id": 5,
+    "title": "Graph Pathfinder",
+    "description": "Visual DSA playground for graph algorithms — Dijkstra, A*, BFS, DFS — with step-by-step animated walkthroughs.",
+    "tags": ["JavaScript", "Canvas API", "Algorithms"],
+    "category": "DSA",
+    "github": "https://github.com/yourusername/graph-pathfinder",
+    "live": "https://graph-pathfinder.demo.com",
+    "featured": false,
+    "year": 2023
+  },
+  {
+    "id": 6,
+    "title": "ChatMind",
+    "description": "LLM-powered personal knowledge base that lets you chat with your own notes, PDFs, and documents using RAG architecture.",
+    "tags": ["LangChain", "ChromaDB", "FastAPI", "React", "OpenAI"],
+    "category": "AI/ML",
+    "github": "https://github.com/yourusername/chatmind",
+    "live": "",
+    "featured": false,
+    "year": 2024
+  }
+]
