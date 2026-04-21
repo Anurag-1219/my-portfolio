@@ -8,30 +8,29 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000; // Render use 10000
 
 // ─── Middleware ────────────────────────────────────────────────────────────────
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: '*', // Production ke liye easy rakhte hain
   methods: ['GET', 'POST'],
 }));
 app.use(express.json());
 
 // Rate limiter for contact form
 const contactLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, 
   max: 5,
   message: { error: 'Too many requests. Please wait 15 minutes.' }
 });
 
-// Serve static frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
+// ✅ SAHI PATH: '../1FRONTEND' use kiya hai kyunki tera folder ka naam wahi hai
+app.use(express.static(path.join(__dirname, '../1FRONTEND')));
 
 // ─── Helper ───────────────────────────────────────────────────────────────────
 const readData = (file) => {
   const filePath = path.join(__dirname, 'data', file);
-  // Check if file exists before reading
   if (!fs.existsSync(filePath)) {
     return [];
   }
@@ -49,49 +48,9 @@ app.get('/api/health', (req, res) => {
 app.get('/api/projects', (req, res) => {
   try {
     const projects = readData('projects.json');
-    const { category, featured } = req.query;
-
-    let filtered = projects;
-    if (category && category !== 'All') {
-      filtered = filtered.filter(p => p.category === category);
-    }
-    if (featured === 'true') {
-      filtered = filtered.filter(p => p.featured);
-    }
-
-    res.json({ success: true, data: filtered, total: filtered.length });
+    res.json({ success: true, data: projects });
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch projects' });
-  }
-});
-
-// GET /api/blogs
-app.get('/api/blogs', (req, res) => {
-  try {
-    const blogs = readData('blogs.json');
-    const { category } = req.query;
-
-    let filtered = blogs;
-    if (category && category !== 'All') {
-      filtered = filtered.filter(b => b.category === category);
-    }
-
-    const preview = filtered.map(({ content, ...rest }) => rest);
-    res.json({ success: true, data: preview, total: preview.length });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch blogs' });
-  }
-});
-
-// GET /api/blogs/:slug
-app.get('/api/blogs/:slug', (req, res) => {
-  try {
-    const blogs = readData('blogs.json');
-    const blog = blogs.find(b => b.slug === req.params.slug);
-    if (!blog) return res.status(404).json({ error: 'Blog not found' });
-    res.json({ success: true, data: blog });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch blog' });
   }
 });
 
@@ -105,61 +64,38 @@ app.get('/api/skills', (req, res) => {
   }
 });
 
-// POST /api/contact - AB YE DATA SAVE KAREGA
+// POST /api/contact
 app.post('/api/contact', contactLimiter, (req, res) => {
   try {
-    const { name, email, subject, message } = req.body;
-
+    const { name, email, message } = req.body;
     if (!name || !email || !message) {
-      return res.status(400).json({ error: 'Name, email, and message are required.' });
+      return res.status(400).json({ error: 'Missing fields' });
     }
-
-    // Logic to save message in messages.json
+    
+    // Data save karne ka logic (Render par temporary rahega)
     const messagesPath = path.join(__dirname, 'data', 'messages.json');
-    let messages = [];
-
-    if (fs.existsSync(messagesPath)) {
-      const fileData = fs.readFileSync(messagesPath, 'utf-8');
-      messages = JSON.parse(fileData || '[]');
+    if (!fs.existsSync(path.join(__dirname, 'data'))) {
+        fs.mkdirSync(path.join(__dirname, 'data'));
     }
-
-    const newMessage = {
-      id: Date.now(),
-      name,
-      email,
-      subject: subject || 'N/A',
-      message,
-      time: new Date().toISOString()
-    };
-
-    messages.push(newMessage);
+    
+    let messages = [];
+    if (fs.existsSync(messagesPath)) {
+      messages = JSON.parse(fs.readFileSync(messagesPath, 'utf-8') || '[]');
+    }
+    messages.push({ name, email, message, time: new Date() });
     fs.writeFileSync(messagesPath, JSON.stringify(messages, null, 2));
 
-    console.log(`\n✅ Message Saved from: ${name}`);
-
-    res.json({
-      success: true,
-      message: 'Message received! I\'ll get back to you within 24 hours. 🚀'
-    });
+    res.json({ success: true, message: 'Message saved!' });
   } catch (err) {
-    console.error('Contact error:', err);
-    res.status(500).json({ error: 'Failed to save message.' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
-// GET /api/resume
-app.get('/api/resume', (req, res) => {
-  const resumePath = path.join(__dirname, 'data', 'resume.pdf');
-  if (!fs.existsSync(resumePath)) {
-    return res.status(404).json({ error: 'Resume not found.' });
-  }
-  res.sendFile(resumePath);
-});
-
+// ✅ SAHI PATH: Yahan bhi 1FRONTEND kar diya hai
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../1FRONTEND', 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`\n🚀 Server running at http://localhost:${PORT}`);
+  console.log(`\n🚀 Server running on port ${PORT}`);
 });
