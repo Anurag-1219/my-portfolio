@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 const mysql = require('mysql2/promise');
+const fetch = require('node-fetch');
 
 const app = express();
 const PORT = process.env.PORT || 10000;
@@ -83,6 +84,24 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
   }
 });
 
+// GET /api/leetcode-stats
+app.get('/api/leetcode-stats', async (req, res) => {
+  try {
+    const response = await fetch('https://alfa-leetcode-api.onrender.com/Anurag1219/solved');
+    const data = await response.json();
+    res.json({ 
+      success: true, 
+      data: {
+        totalSolved: data.solvedProblem,
+        easySolved: data.easySolved,
+        mediumSolved: data.mediumSolved,
+        hardSolved: data.hardSolved
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch LeetCode stats' });
+  }
+});
 // Fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../1FRONTEND', 'index.html'));
