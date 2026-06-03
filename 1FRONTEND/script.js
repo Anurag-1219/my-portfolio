@@ -102,9 +102,14 @@ async function loadLeetCodeStats() {
   try {
     const r = await fetch(`${API}/leetcode-stats`);
     const d = await r.json();
-    if(d.success) {
-      const leetcodeEl = document.querySelector('.stat-num[data-target]');
-      if(leetcodeEl) leetcodeEl.dataset.target = d.data.totalSolved;
+  if(d.success) {
+      document.querySelectorAll('.stat-num').forEach(el => {
+        const label = el.nextElementSibling?.textContent?.toLowerCase();
+        if(label && label.includes('leetcode')) {
+          el.dataset.target = d.data.totalSolved;
+          el.textContent = d.data.totalSolved + '+';
+        }
+      });
     }
   } catch(err) {
     console.log('LeetCode fetch failed:', err);
