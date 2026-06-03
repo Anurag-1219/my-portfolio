@@ -96,6 +96,20 @@ const API = '/api';
 })();
 
 /* 4. COUNTER ANIMATION */
+
+/* LEETCODE STATS */
+async function loadLeetCodeStats() {
+  try {
+    const r = await fetch(`${API}/leetcode-stats`);
+    const d = await r.json();
+    if(d.success) {
+      const leetcodeEl = document.querySelector('.stat-num[data-target]');
+      if(leetcodeEl) leetcodeEl.dataset.target = d.data.totalSolved;
+    }
+  } catch(err) {
+    console.log('LeetCode fetch failed:', err);
+  }
+}
 function animateCounters() {
   document.querySelectorAll('[data-target]').forEach(el => {
     const target = parseInt(el.dataset.target);
@@ -344,6 +358,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // API Data fetch karo aur DOM hydrate hone ka wait karo
   await Promise.all([
+    loadLeetCodeStats(),
     loadProjects(),
     loadSkills(),
     loadBlogs()
