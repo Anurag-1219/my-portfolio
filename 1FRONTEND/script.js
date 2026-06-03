@@ -6,7 +6,7 @@ console.log("script loaded");
    script.js — Anurag Yadav Portfolio
    ══════════════════════════════════════════════════════ */
 
-const API = 'http://localhost:5000/api';
+const API = '/api';
 
 /* 2. CANVAS PARTICLE ANIMATION */
 (function initCanvas() {
