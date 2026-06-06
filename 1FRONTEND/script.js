@@ -340,7 +340,7 @@ function showStatus(type, msg) {
 
 /* 11-13. UTILS */
 function downloadResume() {
-  fetch(`${API}/resume`).then(r => r.blob()).then(blob => {
+fetch(`https://github.com/Anurag-1219/my-portfolio/raw/main/resume.pdf`).then(r => r.blob()).then(blob => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = 'Resume.pdf'; a.click();
   }).catch(() => showToast('📄 Add resume.pdf to backend.'));
