@@ -179,16 +179,14 @@ async function loadProjects(filter = 'All') {
       const r = await fetch(`${API}/projects`);
       const d = await r.json();
       allProjects = d.data;
-    } catch {
-      allProjects = [
-        { id: 1, title: 'NeuralNet Visualizer', description: 'Interactive DL visualization.', tags: ['Python', 'D3.js'], category: 'AI/ML', github: '#', live: '#' },
-        { id: 2, title: 'AlgoArena', description: 'Competitive DSA platform.', tags: ['React', 'Docker'], category: 'DSA', github: '#', live: '#' },
-        { id: 3, title: 'DevFlow', description: 'Productivity dashboard.', tags: ['Next.js', 'OpenAI'], category: 'Web', github: '#', live: '#' },
-        { id: 4, title: 'ChatMind', description: 'RAG knowledge base.', tags: ['LangChain', 'React'], category: 'AI/ML', github: '#', live: '' },
-        { id: 5, title: 'Graph Pathfinder', description: 'Graph algorithm playground.', tags: ['JS', 'Canvas'], category: 'DSA', github: '#', live: '#' },
-        { id: 6, title: 'SentimentStream', description: 'Sentiment analysis pipeline.', tags: ['Python', 'BERT'], category: 'AI/ML', github: '#', live: '' }
-      ];
-    }
+    }  catch(err) {
+  console.log('Projects fetch failed:', err);
+  allProjects = [
+    { id: 1, title: 'Breast Cancer Detection', description: 'ML model to detect breast cancer using Wisconsin Dataset.', tags: ['Python', 'Scikit-learn', 'Pandas'], category: 'AI/ML', github: 'https://github.com/Anurag-1219', live: '' },
+    { id: 2, title: 'Diabetes Detection', description: 'Diabetes prediction using Pima Indians Dataset.', tags: ['Python', 'ML', 'NumPy'], category: 'AI/ML', github: 'https://github.com/Anurag-1219', live: '' },
+    { id: 3, title: 'Portfolio Website', description: 'Personal portfolio with Node.js backend.', tags: ['HTML', 'CSS', 'JS'], category: 'Web', github: 'https://github.com/Anurag-1219', live: '' }
+  ];
+}
   }
 
   const filtered = filter === 'All' ? allProjects : allProjects.filter(p => p.category === filter);
