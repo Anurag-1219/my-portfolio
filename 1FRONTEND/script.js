@@ -336,15 +336,20 @@ async function sendMessage() {
 function showStatus(type, msg) {
   const el = document.getElementById('form-status');
   if(el) { el.textContent = msg; el.className = 'form-status ' + type; }
-}
+} 
 
-/* 11-13. UTILS */
+
+
 function downloadResume() {
-fetch(`https://github.com/Anurag-1219/my-portfolio/raw/main/resume.pdf`).then(r => r.blob()).then(blob => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = 'Resume.pdf'; a.click();
-  }).catch(() => showToast('📄 Add resume.pdf to backend.'));
-}
+  window.open(
+    'https://drive.google.com/file/d/14sT7t3jEeHb_x2V8Y8BpbRY7xNwR16e2/view?usp=sharing',
+    '_blank'
+  );
+} 
+
+
+
+
 
 function showToast(msg) {
   const t = document.getElementById('toast');
